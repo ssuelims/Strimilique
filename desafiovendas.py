@@ -1,11 +1,27 @@
 import streamlit as st
 
+
 import requests
 import pandas as pd
 st.title("DASHBOARD DE VENDAS:shopping_trolley:")
 url = "https://labdados.com/produtos"
 response = requests.get(url)
 df = pd.DataFrame.from_dict(response.json())
+
+
+preco_total = df["Preço"].sum()
+linhas_total = df.shape[0]
+
+
+# Formatando valores maiores
+def formatar_valor(valor):
+    if valor >= 1_000_000:
+        return f"{valor / 1_000_000:.1f} milhão"
+    elif valor >= 1_000:
+        return f"{valor / 1_000:.1f} mil"
+    else:
+        return str(valor)
+
 
 st.write(df.shape)
 preco =df["Preço"].sum()
@@ -36,8 +52,13 @@ else:
         linha = df.shape[0]
         linha = str(linha)
         respostalinha = f"{linha[0]} milhao"   
+        
+   # valores de preços e Linhas
    
-   
+resposta = formatar_valor(preco_total)
+respostalinha = formatar_valor(linhas_total)
+
+
         
 if st.button("todos os numeros da receita"):
     st.balloons()
