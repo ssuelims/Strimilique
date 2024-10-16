@@ -3,6 +3,10 @@ import streamlit as st
 
 import requests
 import pandas as pd
+import plotly.express as px
+
+
+
 st.title("DASHBOARD DE VENDAS:shopping_trolley:")
 url = "https://labdados.com/produtos"
 response = requests.get(url)
@@ -30,7 +34,7 @@ linhas = df.shape[0]
 if preco / 1000 < 0.0:
     resposta = df["Preço"].sum()  
 else:
-    if preco / 1000000< 0.0:
+    if preco / 1000000 < 0.0:
         valor = df["Preço"].sum()
         valor = str(valor)
         
@@ -52,6 +56,8 @@ else:
         linha = df.shape[0]
         linha = str(linha)
         respostalinha = f"{linha[0]} milhao"   
+<<<<<<< HEAD
+=======
         
    # valores de preços e Linhas
    
@@ -59,6 +65,7 @@ resposta = formatar_valor(preco_total)
 respostalinha = formatar_valor(linhas_total)
 
 
+>>>>>>> d45021802548a0f48849f8dd1b9d51d5b482eb05
         
 if st.button("todos os numeros da receita"):
     st.balloons()
